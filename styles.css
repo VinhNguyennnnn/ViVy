@@ -1,0 +1,166 @@
+/* Reset CSS */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body, html {
+    height: 100vh;
+    overflow: hidden;
+    font-family: 'Arial', sans-serif;
+}
+
+/* Tường ảnh (Photo Wall) */
+.photo-wall {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); /* Tăng kích thước ảnh */
+    gap: 0; /* Bỏ khoảng trắng giữa các ảnh */
+    overflow: hidden;
+    animation: zoom 30s linear infinite;
+}
+
+.photo-wall img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    filter: brightness(80%);
+    transition: transform 0.5s ease, filter 0.5s ease;
+}
+
+.photo-wall img:hover {
+    filter: brightness(100%);
+    transform: scale(1.1);
+}
+
+/* Hiệu ứng phóng to cho tường ảnh */
+@keyframes zoom {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.05); }
+    100% { transform: scale(1); }
+}
+
+/* Wrapper nội dung trên ảnh */
+.wrapper {
+    position: relative;
+    z-index: 1;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    color: #FFB6C1; /* Màu chữ hồng nhạt */
+    padding: 20px;
+    background: rgba(0, 0, 0, 0.7); /* Nền mờ tối cho nội dung */
+    border-radius: 10px; /* Bo góc cho wrapper */
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5); /* Bóng đổ cho wrapper */
+}
+
+/* Nội dung chính */
+.content h1 {
+    font-size: 4rem;
+    margin-bottom: 20px;
+    text-shadow: 2px 4px 10px rgba(0, 0, 0, 0.7);
+    transition: transform 0.3s; /* Hiệu ứng di chuyển */
+}
+
+.content h1:hover {
+    transform: translateY(-5px); /* Di chuyển lên khi hover */
+}
+
+.content p {
+    font-size: 1.5rem;
+    text-shadow: 1px 2px 6px rgba(0, 0, 0, 0.5);
+    color: skyblue; /* Màu chữ vàng cho lời chúc */
+}
+
+/* Nút */
+.button {
+    background-color: #FF69B4; /* Màu nền của nút */
+    color: white; /* Màu chữ */
+    border: none; /* Không viền */
+    padding: 15px 32px; /* Padding */
+    text-align: center; /* Canh giữa */
+    text-decoration: none; /* Không gạch chân */
+    display: inline-block; /* Đưa vào dòng */
+    font-size: 16px; /* Kích thước chữ */
+    margin: 20px 0; /* Margin */
+    cursor: pointer; /* Con trỏ */
+    border-radius: 4px; /* Bo góc */
+    transition: background-color 0.3s, transform 0.3s, box-shadow 0.3s; /* Hiệu ứng chuyển tiếp */
+    box-shadow: 0 4px 10px rgba(255, 20, 147, 0.3); /* Bóng đổ cho nút */
+    position: relative; /* Vị trí tương đối cho hiệu ứng */
+}
+
+.button:hover {
+    background-color: #FF1493; /* Màu nền khi hover */
+    transform: translateY(-2px) scale(1.05); /* Di chuyển lên và phóng to khi hover */
+    box-shadow: 0 8px 20px rgba(255, 20, 147, 0.5); /* Tăng độ bóng khi hover */
+}
+
+/* Lời chúc ẩn */
+.hidden-checkbox {
+    display: none; /* Ẩn checkbox */
+}
+
+/* Hiện lời chúc với hiệu ứng */
+.hidden {
+    display: none; /* Ẩn lời chúc */
+}
+
+.hidden-checkbox:checked + .button + #wishMessage {
+    display: block; /* Hiện lời chúc khi checkbox được chọn */
+    opacity: 0; /* Bắt đầu với độ mờ 0 */
+    transform: translateY(-20px); /* Di chuyển lên một chút */
+    animation: fadeIn 0.5s forwards; /* Hiệu ứng hiện ra */
+}
+
+/* Hiệu ứng fadeIn */
+@keyframes fadeIn {
+    from {
+        opacity: 0; /* Bắt đầu mờ */
+        transform: translateY(-20px); /* Di chuyển lên một chút */
+    }
+    to {
+        opacity: 1; /* Hoàn toàn hiển thị */
+        transform: translateY(0); /* Trở về vị trí ban đầu */
+    }
+}
+
+/* Hiệu ứng bông hoa rơi */
+.falling-flowers {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none; /* Không ảnh hưởng đến các sự kiện chuột */
+}
+
+.flower {
+    position: absolute;
+    width: 30px; /* Kích thước bông hoa */
+    height: 30px;
+    background-image: url('https://i.imgur.com/BlKpX0Y.png'); /* Đặt ảnh bông hoa */
+    background-size: cover; /* Đảm bảo bông hoa có kích thước đầy đủ */
+    opacity: 0; /* Bắt đầu với độ mờ 0 */
+    animation: fall linear infinite; /* Chạy animation */
+}
+
+/* Animation rơi */
+@keyframes fall {
+    0% {
+        transform: translateY(-10%); /* Bắt đầu từ trên */
+        opacity: 1; /* Độ mờ 1 khi bắt đầu */
+    }
+    100% {
+        transform: translateY(100vh); /* Rơi xuống hết chiều cao */
+        opacity: 0; /* Độ mờ 0 khi kết thúc */
+    }
+}
